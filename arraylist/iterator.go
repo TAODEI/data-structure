@@ -20,7 +20,7 @@ type ArraylistIterator struct {
 	currentIndex int        // 当前索引
 }
 
-func (list *Arraylist) Iterator() Iterator {
+func (list *Arraylist) NewIterator() Iterator {
 	it := new(ArraylistIterator) // 构造迭代器
 	it.currentIndex = 0
 	it.list = list

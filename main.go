@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-// func arraylist_main() {
+// func arraylist_iterator_main() {
 // 	var list arraylist.List = arraylist.NewArrayList()
 // 	list.Append(0)
 // 	list.Append(1)
@@ -14,7 +14,7 @@ import (
 // 	list.Append(3)
 // 	list.Append(4)
 // 	list.Append(5)
-// 	for it := list.Iterator(); it.HasNext(); {
+// 	for it := list.NewIterator(); it.HasNext(); {
 // 		item, _ := it.Next()
 // 		fmt.Println(item)
 // 	}
@@ -48,11 +48,20 @@ func arraylist_stack_main() {
 	}
 }
 
+func arraylist_stack_iterator_main() {
+	// var stack stackarray.StackArray = arraylist.NewArrayListStackIterator()
+	stack := arraylist.NewArrayListStackIterator()
+	for it := stack.It; it.HasNext(); {
+		item, _ := it.Next()
+		fmt.Println(item)
+	}
+
+}
 func test() {
 	slice := append([]byte("hello "), "world"...)
 	fmt.Println(slice)
 }
 
 func main() {
-	arraylist_stack_main()
+	arraylist_stack_iterator_main()
 }

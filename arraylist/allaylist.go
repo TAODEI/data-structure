@@ -31,6 +31,7 @@ func NewArrayList() *Arraylist {
 
 func (list *Arraylist) Clear() {
 	// GOTO
+	list = NewArrayList()
 }
 
 // 检测内存
