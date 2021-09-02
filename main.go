@@ -86,13 +86,38 @@ func getAllFile_main() {
 	for _, file := range files {
 		fmt.Println(file)
 	}
-
 }
+
+func getFileStack_main() {
+	path := "/home/taodei/Desktop/data-structure"
+	files := []string{}
+	var stack stackarray.StackArray = stackarray.NewStack()
+	stack.Push(path)
+	for !stack.IsEmpty() {
+		newPath := stack.Pop().(string)
+		files = append(files, newPath)
+		reader, err := ioutil.ReadDir(newPath)
+		if err != nil {
+			panic(err)
+		}
+		for _, fi := range reader {
+			fullDir := newPath + "/" + fi.Name()
+			if fi.IsDir() {
+				stack.Push(fullDir)
+			} else {
+				files = append(files, fullDir) // 追加路径
+			}
+		}
+	}
+	for _, file := range files {
+		fmt.Println(file)
+	}
+}
+
 func test() {
-	slice := append([]byte("hello "), "world"...)
-	fmt.Println(slice)
+
 }
 
 func main() {
-	getAllFile_main()
+	getFileStack_main()
 }

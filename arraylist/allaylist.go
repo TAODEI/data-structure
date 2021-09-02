@@ -5,16 +5,16 @@ import (
 	"fmt"
 )
 
-// type List interface {
-// 	Size() int
-// 	Get(index int) (interface{}, error)         // 抓取第几个元素
-// 	Set(index int, newcal interface{}) error    // 设置某个
-// 	Append(newval interface{})                  // 追加
-// 	Insert(index int, newval interface{}) error // 插入
-// 	Delete(index int)
-// 	Iterator() Iterator // 构造初始化接口
-// 	Clear()
-// }
+type List interface {
+	Size() int
+	Get(index int) (interface{}, error)         // 抓取第几个元素
+	Set(index int, newcal interface{}) error    // 设置某个
+	Append(newval interface{})                  // 追加
+	Insert(index int, newval interface{}) error // 插入
+	Delete(index int)
+	Iterator() Iterator // 构造初始化接口
+	Clear()
+}
 
 type Arraylist struct {
 	dataStore []interface{}
@@ -31,7 +31,7 @@ func NewArrayList() *Arraylist {
 
 func (list *Arraylist) Clear() {
 	// GOTO
-	list = NewArrayList()
+	// list = NewArrayList()
 }
 
 // 检测内存

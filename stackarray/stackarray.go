@@ -2,6 +2,8 @@ package stackarray
 
 import "fmt"
 
+const cap = 1000
+
 type StackArray interface {
 	Clear()
 	Size() int
@@ -20,15 +22,15 @@ type Stack struct {
 
 func NewStack() *Stack {
 	return &Stack{
-		// make([]interface{}, 0, 10),
-		capSize:     10,
+		// make([]interface{}, 0, cap),
+		capSize:     cap,
 		currentSize: 0,
 	}
 }
 
 func (stack *Stack) Clear() {
-	stack.dataSource = make([]interface{}, 10)
-	stack.capSize = 10
+	stack.dataSource = make([]interface{}, cap)
+	stack.capSize = cap
 	stack.currentSize = 0
 }
 
