@@ -4,6 +4,7 @@ import (
 	"data/arraylist"
 	"data/stackarray"
 	"fmt"
+	"io/ioutil"
 )
 
 // func arraylist_iterator_main() {
@@ -55,6 +56,36 @@ func arraylist_stack_iterator_main() {
 		item, _ := it.Next()
 		fmt.Println(item)
 	}
+}
+
+func getAllFile(path string, files []string) ([]string, error) {
+	reader, err := ioutil.ReadDir(path)
+	if err != nil {
+		return nil, err
+	}
+	for _, fi := range reader {
+		fullDir := path + "/" + fi.Name()
+		if fi.IsDir() {
+			files = append(files, fullDir) // 追加路径
+			files, err = getAllFile(fullDir, files)
+		} else {
+			files = append(files, fullDir)
+		}
+	}
+	return files, err
+}
+
+func getAllFile_main() {
+	path := "/home/taodei/Desktop/go_practise"
+	files := []string{}
+	var err error
+	files, err = getAllFile(path, files)
+	if err != nil {
+		panic(err)
+	}
+	for _, file := range files {
+		fmt.Println(file)
+	}
 
 }
 func test() {
@@ -63,5 +94,5 @@ func test() {
 }
 
 func main() {
-	arraylist_stack_iterator_main()
+	getAllFile_main()
 }
