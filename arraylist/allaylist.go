@@ -1,5 +1,6 @@
 package arraylist
 
+// 顺序表
 import (
 	"errors"
 	"fmt"

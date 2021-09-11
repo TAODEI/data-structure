@@ -12,6 +12,9 @@ class Node {
 //     Node *Next;
 // };
 
+bool x = true;
+
+
 class LinkList {
   public:
     Node *Head;
