@@ -31,7 +31,7 @@ func NewArrayList() *Arraylist {
 }
 
 func (list *Arraylist) Clear() {
-	// GOTO
+	// TODO
 	// list = NewArrayList()
 }
 
@@ -92,7 +92,7 @@ func (list *Arraylist) Set(index int, newcal interface{}) error {
 }
 
 func (list *Arraylist) Delete(index int) {
-	// GOTO
+	// TODO
 	list.dataStore = append(list.dataStore[:index], list.dataStore[index+1:]...)
 	list.theSize--
 }

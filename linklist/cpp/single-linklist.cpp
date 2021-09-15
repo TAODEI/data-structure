@@ -3,17 +3,9 @@
 
 class Node {
   public:
-    int Score;
+    int Data;
     Node *Next;
 };
-
-// struct Node {
-//     int Score;
-//     Node *Next;
-// };
-
-bool x = true;
-
 
 class LinkList {
   public:
@@ -36,7 +28,7 @@ int main() {
     list.Display();
 
     pnew = new Node;
-    pnew->Score = 88;
+    pnew->Data = 88;
 
     list.Insert(pnew, 3);
     printf("after insert: ");
@@ -49,21 +41,21 @@ int main() {
 
 void LinkList::CreateLinkList() {
     Head = new Node;
-    Head->Score = 0;
+    Head->Data = 0;
     Head->Next = NULL;
     Node *pnew, *tail;
-    int Score;
+    int Data;
 
     Head->Next = NULL;
     tail = Head;
-    printf("input the Score of students:\n");
+    printf("input the Data of students:\n");
     while (1) {
-        scanf("%d", &Score);
-        if (Score < 0) {
+        scanf("%d", &Data);
+        if (Data < 0) {
             break;
         }
         pnew = new Node;
-        pnew->Score = Score;
+        pnew->Data = Data;
         pnew->Next = NULL;
         tail->Next = pnew;
         tail = pnew;
@@ -103,7 +95,7 @@ void LinkList::Delete(int index) {
 void LinkList::Display() {
     Node *p;
     for (p = Head->Next; p != NULL; p = p->Next) {
-        printf("%d ", p->Score);
+        printf("%d ", p->Data);
     }
     printf("\n");
 }
