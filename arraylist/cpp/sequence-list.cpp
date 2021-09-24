@@ -29,15 +29,15 @@ class List {
         elem = new Element[size];
     }
     ~List() {
-        delete[] elem;
-        Free();
+        // delete[] elem;
+        // Free();
     }
     int Locate(Element e);
-    void Insert(int imdex, Element e);
+    void Insert(int index, Element e);
     void Delete(int index, Element &e);
     void Free();  // 释放
     void Clear(); // 置空 ?
-    bool checkIsEmpty();
+    bool isEmpty();
     int GetLength();
     Element GetElem(int index);
     int GetPriorElem(Element cut_e, Element &pre_e); // 获取前驱 返回状态码
@@ -48,10 +48,10 @@ class List {
     Element *elem; // 数组
     int len;
     int size;
-    void checkIsFull();
+    void checkFull();
 };
 
-void List::checkIsFull() {
+void List::checkFull() {
     if (len == size) {
         size *= 2;
         Element *newElem = new Element[size];
@@ -64,7 +64,7 @@ void List::checkIsFull() {
 }
 
 int List::Locate(Element e) {
-    if (checkIsEmpty()) {
+    if (isEmpty()) {
         return 0;
     }
 
@@ -78,7 +78,7 @@ int List::Locate(Element e) {
 }
 
 void List::Insert(int index, Element e) {
-    checkIsFull();
+    checkFull();
 
     if (index == -1) { // 末尾插入
         elem[len] = e;
@@ -123,7 +123,7 @@ void List::Clear() {
     len = 0;
 }
 
-bool List::checkIsEmpty() {
+bool List::isEmpty() {
     if (len == 0) { // 空
         return true;
     } else {
@@ -146,7 +146,7 @@ Element List::GetElem(int index) {
 
 // 获取前驱 返回状态码
 int List::GetPriorElem(Element cut_e, Element &pre_e) {
-    if (checkIsEmpty()) {
+    if (isEmpty()) {
         return 1;
     }
     if (elem[0].Equal(cut_e)) {
@@ -163,7 +163,7 @@ int List::GetPriorElem(Element cut_e, Element &pre_e) {
 
 // 获取后继 返回状态码
 int List::GetNextElem(Element cut_e, Element &next_e) {
-    if (checkIsEmpty()) {
+    if (isEmpty()) {
         return 1;
     }
     if (elem[len - 1].Equal(cut_e)) {
