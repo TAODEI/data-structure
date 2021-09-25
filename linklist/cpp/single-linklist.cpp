@@ -19,25 +19,25 @@ class LinkList {
     void Free();
 };
 
-int main() {
-    LinkList list;
-    Node *Head, *pnew;
-    list.CreateLinkList();
+// int main() {
+//     LinkList list;
+//     Node *Head, *pnew;
+//     list.CreateLinkList();
 
-    printf("after create: ");
-    list.Display();
+//     printf("after create: ");
+//     list.Display();
 
-    pnew = new Node;
-    pnew->Data = 88;
+//     pnew = new Node;
+//     pnew->Data = 88;
 
-    list.Insert(pnew, 3);
-    printf("after insert: ");
-    list.Display();
-    list.Delete(3);
-    printf("after delete: ");
-    list.Display();
-    list.Free();
-}
+//     list.Insert(pnew, 3);
+//     printf("after insert: ");
+//     list.Display();
+//     list.Delete(3);
+//     printf("after delete: ");
+//     list.Display();
+//     list.Free();
+// }
 
 void LinkList::CreateLinkList() {
     Head = new Node;
@@ -108,4 +108,20 @@ void LinkList::Free() {
         free(q);
     }
     free(Head);
+}
+
+int main() {
+    LinkList list;
+    Node *Head = new Node;
+    Head->Data = 0;
+    Head->Next = NULL;
+    list.Len = 1;
+    list.Head = Head;
+    for (int i = 0; i < 26; i++) {
+        Node *tmp;
+        tmp->Data = 'a' + i;
+        list.Insert(tmp, list.Len-1);
+        list.Display();
+    }
+    // list.Free();
 }
