@@ -1,127 +1,179 @@
+#include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
+using namespace std;
 
-class Node {
-  public:
+struct Node {
     int Data;
     Node *Next;
+    Node(int x) : Data(x), Next(NULL) {}
 };
+
+void ErrorMessage(string s) {
+    cout << s << endl;
+}
 
 class LinkList {
   public:
-    Node *Head;
     int Len;
 
-    void CreateLinkList();
-    void Insert(Node *pnew, int index);
-    void Delete(int index);
-    void Display();
-    void Free();
-};
+    // Initialize your data structure here.
+    LinkList() {
+        head = new Node(0);
+        Len = 0;
+    }
 
-// int main() {
-//     LinkList list;
-//     Node *Head, *pnew;
-//     list.CreateLinkList();
-
-//     printf("after create: ");
-//     list.Display();
-
-//     pnew = new Node;
-//     pnew->Data = 88;
-
-//     list.Insert(pnew, 3);
-//     printf("after insert: ");
-//     list.Display();
-//     list.Delete(3);
-//     printf("after delete: ");
-//     list.Display();
-//     list.Free();
-// }
-
-void LinkList::CreateLinkList() {
-    Head = new Node;
-    Head->Data = 0;
-    Head->Next = NULL;
-    Node *pnew, *tail;
-    int Data;
-
-    Head->Next = NULL;
-    tail = Head;
-    printf("input the Data of students:\n");
-    while (1) {
-        scanf("%d", &Data);
-        if (Data < 0) {
-            break;
+    // Add a node of value val before the index-th node in the linked list. If
+    // index equals to the length of linked list, the node will be appended to
+    // the end of linked list. If index is greater than the length, the node
+    // will not be inserted.
+    void Insert(int index, Node *pnew) {
+        if (Len == index) {
+            
+            Node *p = head;
+            for (int j = 0; j < index && p != NULL; j++) {
+                p = p->Next;
+            }
+            p->Next = pnew;
+            Len++;
+            return;
         }
-        pnew = new Node;
-        pnew->Data = Data;
-        pnew->Next = NULL;
-        tail->Next = pnew;
-        tail = pnew;
-    }
-}
+        if (index < 1 || index > Len) {
+            ErrorMessage("索引越界!");
+            return;
+        }
+        Node *p = head;
+        for (int j = 1; j < index && p != NULL; j++) {
+            p = p->Next;
+        }
 
-void LinkList::Insert(Node *pnew, int index) {
-    Node *p = Head;
-    int j;
-    for (j = 0; j < index && p != NULL; j++) {
-        p = p->Next;
+        pnew->Next = p->Next;
+        p->Next = pnew;
+        Len++;
     }
-    if (p == NULL) {
-        printf("the %d node not found!\n", index);
-        return;
-    }
-    pnew->Next = p->Next;
-    p->Next = pnew;
-}
 
-void LinkList::Delete(int index) {
-    Node *p = Head, *q;
-    if (index == 0) {
-        return;
-    }
-    for (int j = 1; j < index && p->Next != NULL; j++)
-        p = p->Next;
-    if (p->Next == NULL) {
-        printf("the %d node not found!\n", index);
-        return;
-    }
-    q = p->Next;
-    p->Next = q->Next;
-    free(q);
-}
+    // Delete the index-th node in the linked list, if the index is valid.
+    void Delete(int index) {
+        if (index <= 0 || index > Len) {
+            ErrorMessage("索引越界!");
+            return;
+        }
 
-void LinkList::Display() {
-    Node *p;
-    for (p = Head->Next; p != NULL; p = p->Next) {
-        printf("%d ", p->Data);
-    }
-    printf("\n");
-}
-
-void LinkList::Free() {
-    Node *q, *p = Head;
-    while (p->Next != NULL) {
+        Node *p = head, *q;
+        for (int j = 1; j < index && p->Next != NULL; j++)
+            p = p->Next;
+        if (p->Next == NULL) {
+            printf("the %d node not found!\n", index);
+            return;
+        }
         q = p->Next;
         p->Next = q->Next;
         free(q);
     }
-    free(Head);
-}
+
+    void Free() {
+        Node *q, *p = head;
+        while (p->Next != NULL) {
+            q = p->Next;
+            p->Next = q->Next;
+            free(q);
+        }
+        free(head);
+    }
+
+    int Locate(Node *p) {
+        Node *q = head;
+        int index = 0;
+        while (q->Next != NULL) {
+            q = q->Next;
+            index++;
+            if (q->Data == p->Data) {
+                return index;
+            }
+        }
+        return 0;
+    }
+
+    // Get the value of the index-th node in the linked list. If the index is
+    // invalid, return -1.
+    int GetElem(int index) {
+        if (index <= 0 || index > Len) {
+            ErrorMessage("索引越界!");
+            return -1;
+        }
+
+        Node *p = head;
+        for (int j = 0; j < index && p != NULL; j++) {
+            p = p->Next;
+        }
+        return p->Data;
+    }
+
+    // get 前驱, return state code
+    int GetPriorElem(Node cut_e, Node &pre_e) {
+        if (head->Next == NULL) {
+            return 1;
+        }
+
+        Node *p = head;
+        while (p->Next != NULL) {
+            if (cut_e.Data == p->Next->Data) {
+                pre_e = *p;
+                return 0;
+            }
+            p = p->Next;
+        }
+        return 1;
+    }
+
+    // get 后继, return state code
+    int GetNextElem(Node cut_e, Node &next_e) {
+        if (head->Next == NULL) {
+            return 1;
+        }
+
+        Node *p = head;
+        while (p->Next != NULL) {
+            p = p->Next;
+            if (cut_e.Data == p->Data) {
+                next_e = *p->Next;
+                return 0;
+            }
+            
+        }
+        return 1;
+    }
+
+    void Display() {
+        for (Node *p = head->Next; p != NULL; p = p->Next) {
+            printf("%c ", p->Data);
+        }
+        printf("\n");
+    }
+
+  private:
+    Node *head;
+};
 
 int main() {
     LinkList list;
-    Node *Head = new Node;
-    Head->Data = 0;
-    Head->Next = NULL;
-    list.Len = 1;
-    list.Head = Head;
+
+    // insert 26 alphabets
     for (int i = 0; i < 26; i++) {
-        Node *tmp;
-        tmp->Data = 'a' + i;
-        list.Insert(tmp, list.Len-1);
-        list.Display();
+        Node *tmp = new Node('a' + i);
+        list.Insert(list.Len, tmp);
     }
-    // list.Free();
+    list.Display();
+
+    Node *tmp = new Node('a' - 3);
+    cout << list.Locate(tmp) << endl;
+
+    cout << list.GetElem(4) << endl;
+    printf("%d\n", 'a');
+
+    list.Delete(3);
+    list.Display();
+
+    list.Delete(3);
+    list.Display();
+    list.Free();
 }

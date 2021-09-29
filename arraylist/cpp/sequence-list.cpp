@@ -32,6 +32,22 @@ class List {
         // delete[] elem;
         // Free();
     }
+
+    // 深拷贝构造函数
+    // List(List &list) {
+    //     len = list.GetLength();
+    //     size = list.size;
+    //     for (int i = 1; i <= len; i++) {
+    //         elem[i-1] = list.GetElem(i);
+    //     }
+    // }
+    void Copy(List list) {
+        elem = new Element[size];
+        for (int i = 1; i <= len; i++) {
+            elem[i-1] = list.GetElem(i);
+        }
+    }
+    
     int Locate(Element e);
     void Insert(int index, Element e);
     void Delete(int index, Element &e);

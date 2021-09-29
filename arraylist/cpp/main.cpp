@@ -29,46 +29,63 @@ List Union2(List &la, List &lb) {
     return lc;
 }
 
+// 交集
+List Intersection(List la, List lb) {
+    List lc = la;
+    lc.Copy(la);
+
+    for (int i = 1; i <= lc.GetLength(); i++) {
+        Element _ = lc.GetElem(i);
+        if (!lb.Locate(_)) {
+            lc.Delete(i, _);
+            i--;
+        }
+    }
+    return lc;
+}
+
+// 差集
+List Subtraction(List la, List lb) {
+    List lc = la;
+    lc.Copy(la);
+
+    for (int i = 1; i <= lc.GetLength(); i++) {
+        Element _ = lc.GetElem(i);
+        if (lb.Locate(_)) {
+            lc.Delete(i, _);
+            i--;
+        }
+    }
+    return lc;
+}
+
 int main() {
-    List la = List(max_size);
-    List lb = List(max_size);
+    List l1 = List(max_size);
+    List l2 = List(max_size);
     Element elems[10];
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 6; i++) {
         elems[i].Data = i * 10;
-        la.Insert(-1, elems[i]);
+        l1.Insert(-1, elems[i]);
     }
-    for (int i = 0; i < 10; i++) {
-        elems[i].Data += i;
-        lb.Insert(-1, elems[i]);
+    for (int i = 0; i < 7; i++) {
+        elems[i].Data += i - 1;
+        l2.Insert(-1, elems[i]);
     }
-    cout << "la: ";
-    la.Display();
-    cout << "lb: ";
-    lb.Display();
-    
-    Union(la, lb);
-    cout << "la: ";
-    la.Display();
+    cout << "l1: ";
+    l1.Display();
+    cout << "l2: ";
+    l2.Display();
 
-    List lc = Union2(la, lb);
-    cout << "lc: ";
-    lc.Display();
+    List l3 = Intersection(l1, l2);
+    cout << "l3: ";
+    l3.Display();
 
-    // Element elem1, elem2;
-    // elem1.Data = 25;
-    // cout << la.Locate(elem1) << endl;
-    // elem1.Data = 20;
-    // cout << la.Locate(elem1) << endl;
+    List l4 = Subtraction(l1, l2);
+    cout << "l4: ";
+    l4.Display();
 
-    // la.Delete(5, elem2);
-    // cout << elem2.Data << endl;
-    // la.Display();
-    // la.Delete(5, elem2);
-    // la.Display();
-
-    // la.Clear();
-    // la.Display();
-
-    // la.Free();
+    List l5 = Subtraction(l2, l1);
+    cout << "l5: ";
+    l5.Display();
 }
