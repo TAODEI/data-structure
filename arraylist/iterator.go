@@ -5,7 +5,7 @@ import "errors"
 // 迭代器
 type Iterator interface {
 	HasNext() bool // 是否有下一个
-	Next() (interface{}, error)
+	Next() interface{}
 	Remove()       // 删除
 	GetIndex() int // 得到索引
 }
@@ -31,9 +31,9 @@ func (it *ArraylistIterator) HasNext() bool {
 	return it.currentIndex < it.list.theSize
 }
 
-func (it *ArraylistIterator) Next() (interface{}, error) {
+func (it *ArraylistIterator) Next() interface{} {
 	if !it.HasNext() {
-		return nil, errors.New("can't find the next one")
+		panic(errors.New("can't find the next one"))
 	}
 	it.currentIndex++
 	return it.list.Get(it.currentIndex - 1)

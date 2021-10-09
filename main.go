@@ -53,7 +53,7 @@ func arraylist_stack_iterator_main() {
 	// var stack stackarray.StackArray = arraylist.NewArrayListStackIterator()
 	stack := arraylist.NewArrayListStackIterator()
 	for it := stack.It; it.HasNext(); {
-		item, _ := it.Next()
+		item := it.Next()
 		fmt.Println(item)
 	}
 }
@@ -114,10 +114,24 @@ func getFileStack_main() {
 	}
 }
 
+func arraylist_stack_quicksort_main() {
+	var list arraylist.List = arraylist.NewArrayList()
+	array := []int{500, 256, 301, 751, 129, 937, 863, 742, 694, 076, 438}
+	for _, ele := range array {
+		list.Append(ele)
+	}
+	list.Show()
+
+	fmt.Println(arraylist.MiddleVal(list))
+
+	// arraylist.QuickSort(list)
+
+}
+
 func test() {
 
 }
 
 func main() {
-	getFileStack_main()
+	arraylist_stack_quicksort_main()
 }

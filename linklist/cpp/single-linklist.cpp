@@ -70,6 +70,17 @@ class LinkList {
         free(q);
     }
 
+    void RemoveElements(int val) {
+        Node *p = head;
+        while (p->Next) {
+            if (p->Next->Data == val) {
+                p->Next = p->Next->Next;
+            } else {
+                p = p->Next;
+            }
+        }
+    }
+
     void Free() {
         Node *q, *p = head;
         while (p->Next != NULL) {

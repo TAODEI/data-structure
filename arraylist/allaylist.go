@@ -8,13 +8,15 @@ import (
 
 type List interface {
 	Size() int
-	Get(index int) (interface{}, error)         // 抓取第几个元素
+	Get(index int) interface{}                  // 抓取第几个元素
 	Set(index int, newcal interface{}) error    // 设置某个
 	Append(newval interface{})                  // 追加
 	Insert(index int, newval interface{}) error // 插入
 	Delete(index int)
-	Iterator() Iterator // 构造初始化接口
+	// Iterator() Iterator // 构造初始化接口
 	Clear()
+	Show()
+	Partition(int, int) int
 }
 
 type Arraylist struct {
@@ -51,11 +53,12 @@ func (list *Arraylist) Size() int {
 	return list.theSize
 }
 
-func (list *Arraylist) Get(index int) (interface{}, error) {
+func (list *Arraylist) Get(index int) interface{} {
+
 	if index < 0 || index >= list.theSize {
-		return nil, errors.New("索引越界")
+		panic(errors.New("索引越界"))
 	}
-	return list.dataStore[index], nil
+	return list.dataStore[index]
 }
 
 func (list *Arraylist) Append(newval interface{}) {
@@ -95,4 +98,11 @@ func (list *Arraylist) Delete(index int) {
 	// TODO
 	list.dataStore = append(list.dataStore[:index], list.dataStore[index+1:]...)
 	list.theSize--
+}
+
+func (list *Arraylist) Show() {
+	for _, ele := range list.dataStore {
+		fmt.Print(ele, " ")
+	}
+	fmt.Println()
 }

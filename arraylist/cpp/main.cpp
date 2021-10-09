@@ -64,12 +64,15 @@ int main() {
     List l2 = List(max_size);
     Element elems[10];
 
-    for (int i = 0; i < 6; i++) {
-        elems[i].Data = i * 10;
+    for (int i = 1; i <= 4; i++) {
+        elems[i].Data = i;
         l1.Insert(-1, elems[i]);
     }
-    for (int i = 0; i < 7; i++) {
-        elems[i].Data += i - 1;
+    for (int i = 2; i <= 7; i++) {
+        if (i == 4) {
+            continue;
+        }
+        elems[i].Data = i;
         l2.Insert(-1, elems[i]);
     }
     cout << "l1: ";
@@ -78,14 +81,14 @@ int main() {
     l2.Display();
 
     List l3 = Intersection(l1, l2);
-    cout << "l3: ";
+    cout << "l1*l2: ";
     l3.Display();
 
     List l4 = Subtraction(l1, l2);
-    cout << "l4: ";
+    cout << "l1-l2: ";
     l4.Display();
 
     List l5 = Subtraction(l2, l1);
-    cout << "l5: ";
+    cout << "l2-l1: ";
     l5.Display();
 }
