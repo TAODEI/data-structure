@@ -59,8 +59,9 @@ class LinkList {
         }
 
         Node *p = head, *q;
-        for (int j = 1; j < index && p->Next != NULL; j++)
+        for (int j = 1; j < index && p->Next != NULL; j++) {
             p = p->Next;
+        }
         if (p->Next == NULL) {
             printf("the %d node not found!\n", index);
             return;
