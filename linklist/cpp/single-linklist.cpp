@@ -22,6 +22,22 @@ class LinkList {
         Len = 0;
     }
 
+    void Copy(const LinkList &list) {
+        head = new Node(0);
+        auto q = list.head->Next;
+        auto p = head;
+        while (q) {
+            auto newNode = new Node(q->Data);
+            p->Next = newNode;
+            p = p->Next;
+            q = q->Next;
+        }
+        Len = list.Len;
+        Display();
+        printf("%d ", 1);
+
+    }
+
     // Add a node of value val before the index-th node in the linked list. If
     // index equals to the length of linked list, the node will be appended to
     // the end of linked list. If index is greater than the length, the node
@@ -68,6 +84,7 @@ class LinkList {
         }
         q = p->Next;
         p->Next = q->Next;
+        Len--;
         free(q);
     }
 
@@ -157,7 +174,7 @@ class LinkList {
 
     void Display() {
         for (Node *p = head->Next; p != NULL; p = p->Next) {
-            printf("%c ", p->Data);
+            printf("%d ", p->Data);
         }
         printf("\n");
     }
@@ -166,26 +183,26 @@ class LinkList {
     Node *head;
 };
 
-int main() {
-    LinkList list;
+// int main() {
+//     LinkList list;
 
-    // insert 26 alphabets
-    for (int i = 0; i < 26; i++) {
-        Node *tmp = new Node('a' + i);
-        list.Insert(list.Len, tmp);
-    }
-    list.Display();
+//     // insert 26 alphabets
+//     for (int i = 0; i < 26; i++) {
+//         Node *tmp = new Node('a' + i);
+//         list.Insert(list.Len, tmp);
+//     }
+//     list.Display();
 
-    Node *tmp = new Node('a' - 3);
-    cout << list.Locate(tmp) << endl;
+//     Node *tmp = new Node('a' - 3);
+//     cout << list.Locate(tmp) << endl;
 
-    cout << list.GetElem(4) << endl;
-    printf("%d\n", 'a');
+//     cout << list.GetElem(4) << endl;
+//     printf("%d\n", 'a');
 
-    list.Delete(3);
-    list.Display();
+//     list.Delete(3);
+//     list.Display();
 
-    list.Delete(3);
-    list.Display();
-    list.Free();
-}
+//     list.Delete(3);
+//     list.Display();
+//     list.Free();
+// }
