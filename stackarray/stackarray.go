@@ -20,6 +20,14 @@ type Stack struct {
 	currentSize int
 }
 
+func (s *Stack) Show(w []int) {
+	for _, data := range s.dataSource {
+		fmt.Print(w[data.(int)])
+		fmt.Print(" ")
+	}
+	fmt.Println()
+}
+
 func NewStack() *Stack {
 	return &Stack{
 		// make([]interface{}, 0, cap),

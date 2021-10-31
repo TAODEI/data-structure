@@ -1,6 +1,6 @@
-class MyCircularQueue {
+class CircularQueue {
   public:
-    MyCircularQueue(int k) {
+    CircularQueue(int k) {
 
     }
     
@@ -33,7 +33,7 @@ class MyCircularQueue {
 // Your MyCircularQueue object will be instantiated and called as such:
 int main() {
 
-    MyCircularQueue *circularQueue = new MyCircularQueue(3); // 设置长度为 3
+    CircularQueue *circularQueue = new CircularQueue(3); // 设置长度为 3
     circularQueue->enQueue(1); // 返回 true
     circularQueue->enQueue(2); // 返回 true
     circularQueue->enQueue(3); // 返回 true

@@ -133,5 +133,7 @@ func test() {
 }
 
 func main() {
-	arraylist_stack_quicksort_main()
+	// arraylist_stack_quicksort_main()
+	w := []int{1, 8, 4, 3, 5, 2}
+	stackarray.Knapsack(w, 10)
 }

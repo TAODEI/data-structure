@@ -2,20 +2,17 @@
 
 using namespace std;
 
-const int max_size = 100;
+const int max_size = 1000;
 
 class Element {
   public:
-    // bool operator==(const Element &value) const;
-    int Data;
-
-    bool Equal(Element e) {
-        if (Data == e.Data) {
-            return true;
-        } else {
-            return false;
-        }
+    bool operator==(const Element &e) const {
+        return Data == e.Data;
     }
+    void *Data;
+    Element() {}
+    Element(void *data) : Data(data) {}
+
 };
 // bool operator==(const Element &v1, const Element &v2);
 
@@ -26,6 +23,11 @@ class List {
     List(int maxsize) {
         len = 0;
         size = maxsize;
+        elem = new Element[size];
+    }
+    List() {
+        len = 0;
+        size = max_size;
         elem = new Element[size];
     }
     ~List() {
@@ -59,6 +61,7 @@ class List {
     int GetPriorElem(Element cut_e, Element &pre_e); // 获取前驱 返回状态码
     int GetNextElem(Element cut_e, Element &next_e); // 获取后继 返回状态码
     void Display();
+    void Sort();
 
   private:
     Element *elem; // 数组
@@ -86,7 +89,7 @@ int List::Locate(Element e) {
 
     Element *p = elem;
     for (int i = 1; i <= len; i++, p++) {
-        if (e.Equal(*p)) {
+        if (e == *p) {
             return i;
         }
     }
@@ -165,11 +168,11 @@ int List::GetPriorElem(Element cut_e, Element &pre_e) {
     if (isEmpty()) {
         return 1;
     }
-    if (elem[0].Equal(cut_e)) {
+    if (elem[0] == cut_e) {
         return 2; // 无前驱
     }
     for (int i = 1; i < len; i++) {
-        if (cut_e.Equal(elem[i])) {
+        if (cut_e == elem[i]) {
             pre_e = elem[i - 1];
             return 0; // 成功
         }
@@ -182,18 +185,18 @@ int List::GetNextElem(Element cut_e, Element &next_e) {
     if (isEmpty()) {
         return 1;
     }
-    if (elem[len - 1].Equal(cut_e)) {
+    if (elem[len - 1] == cut_e) {
         return 2; // 无后继
     }
     for (int i = 0; i < len - 1; i++) {
-        if (cut_e.Equal(elem[i])) {
+        if (cut_e == elem[i]) {
             next_e = elem[i + 1];
             return 0; // 成功
         }
     }
     return 1; // 未找到
 }
-
+// ! wrong
 void List::Display() {
     // for(Element &e : elem) {}
     for (int i = 0; i < len; i++) {
