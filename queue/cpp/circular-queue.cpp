@@ -1,47 +1,84 @@
+#include <iostream>
+using namespace std;
+
 class CircularQueue {
   public:
     CircularQueue(int k) {
-
+        size = k+1;
+        elem = new int[size];
     }
     
-    bool enQueue(int value) {
-
+    bool EnQueue(int value) {
+        if (!isFull()) {
+            if (head == -1) {
+                head++;
+                tail++;
+            }
+            tail = (tail + 1) % size;
+            elem[tail] = value;
+            return true;
+        } else {
+            cout << "queue is full" << endl;
+            return false;
+        }
     }
     
-    bool deQueue() {
-
+    bool DeQueue() {
+        if (!isEmpty()) {
+            head = (head + 1) % size;
+            return true;
+        } else {
+            cout << "queue is empty" << endl;
+            return false;
+        }
     }
     
     int Front() {
-
+        if (!isEmpty()) {
+            return elem[(head+1) % size];
+        } else {
+            cout << "queue is empty" << endl;
+            return -1;
+        }
     }
     
     int Rear() {
-
+        if (!isEmpty()) {
+            return elem[tail];
+        } else {
+            cout << "queue is empty" << endl;
+            return -1;
+        }
     }
     
     bool isEmpty() {
-
+        return head == tail; 
     }
     
     bool isFull() {
-
+        return (tail+1) % size == head;
     }
+    private:
+    int size;
+    int head = -1;
+    int tail = -1;
+    int *elem;
 };
 
 
 // Your MyCircularQueue object will be instantiated and called as such:
-int main() {
+// int main() {
 
-    CircularQueue *circularQueue = new CircularQueue(3); // 设置长度为 3
-    circularQueue->enQueue(1); // 返回 true
-    circularQueue->enQueue(2); // 返回 true
-    circularQueue->enQueue(3); // 返回 true
-    circularQueue->enQueue(4); // 返回 false，队列已满
-    circularQueue->Rear(); // 返回 3
-    circularQueue->isFull(); // 返回 true
-    circularQueue->deQueue(); // 返回 true
-    circularQueue->enQueue(4); // 返回 true
-    circularQueue->Rear(); // 返回 4
+//     CircularQueue *circularQueue = new CircularQueue(6); // 设置长度为 3
+//     cout << circularQueue->EnQueue(6) << endl; // 返回 true
+//     // cout << circularQueue->enQueue(2) << endl; // 返回 true
+//     // cout << circularQueue->enQueue(3) << endl; // 返回 true
+//     // cout << circularQueue->enQueue(4) << endl; // 返回 false，队列已满
+//     cout << circularQueue->Rear() << endl; // 返回 3
+//     cout << circularQueue->Rear() << endl; // 返回 3
+//     // cout << circularQueue->isFull() << endl; // 返回 true
+//     cout << circularQueue->DeQueue() << endl; // 返回 true
+//     cout << circularQueue->EnQueue(4) << endl; // 返回 true
+//     cout << circularQueue->Rear() << endl; // 返回 4
 
-}
+// }
