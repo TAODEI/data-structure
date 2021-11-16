@@ -53,6 +53,8 @@ vector<int> preorderTraversal(TreeNode* root) {
 }
 
 
+
+
 vector<int> inorderTraversal(TreeNode* root) {
     vector<int> ret;
     if(root == NULL) {
@@ -73,45 +75,52 @@ vector<int> inorderTraversal(TreeNode* root) {
 
 vector<int> inorderTraversal(TreeNode* root) {
     vector<int> ret;
-    if(root == NULL) {
-        return ret;
-    }
+    // if(root == NULL) {
+    //     return ret;
+    // }
 
-    stack<TreeNode*> mystack;
+    stack<TreeNode*> stack;
     TreeNode * p = root;
-    mystack.push(p);
+    // mystack.push(p);
 
-    while(!mystack.empty()){
-        p = mystack.top(); 
-        mystack.pop();
+    while(!stack.empty() || p != nullptr){  // 栈不为空或者树还没有遍历完
+        if(p != nullptr) {       // 扫描结点p的所有左下结点并进栈
+            stack.push(p);      // 一颗树的左边界进栈，左孩子结点进栈
+            p = p->left;
+        } else {
+            p = stack.top();    // 弹出结点，并记录结点值
+            stack.pop();
+            ret.push_back(p->val);
 
-        if(p->right) mystack.push(p->right);
-
-        ret.push_back(p->val);
-        if(p->left) mystack.push(p->left);            
-    }     
-    return ret;       
+            p = p->right;       // 处理右子树
+        }
+    }
 }
+
+
+
 
 vector<int> postorderTraversal(TreeNode* root) {
     vector<int> ret;
-    if(root == NULL) {
-        return ret;
-    }
 
-    stack<TreeNode*> mystack;
+
+    stack<TreeNode*> stack;
     TreeNode * p = root;
-    mystack.push(p);
 
-    while(!mystack.empty()){
-        p = mystack.top();
-        mystack.pop();
+    while(!stack.empty() || p != nullptr){ // 栈不为空或者树还没有遍历完
+  
+        if (p->left != NULL) {
+            stack.push(p);
+            p = p->left;
+        } else if (p->right != NULL) {
+            stack.push(p);
+            p = p->right;
+        } else {
+            ret.push_back(p->val);
+            p = stack.top();
+            stack.pop();
+        }
 
-        if(p->right) mystack.push(p->right);
-
-        if(p->left) mystack.push(p->left);
-        ret.push_back(p->val);
     }
-    // ret.reserve();
-    return ret;  
 }
+
