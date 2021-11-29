@@ -52,9 +52,6 @@ vector<int> preorderTraversal(TreeNode* root) {
     return ret;       
 }
 
-
-
-
 vector<int> inorderTraversal(TreeNode* root) {
     vector<int> ret;
     if(root == NULL) {

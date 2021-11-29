@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "defines": [],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "clang-x64",
+            "C_Cpp.default.compilerArgs": [
+                "-g",
+                "${file}",
+                "-std=c++11",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+        
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/Library/Developer/CommandLineTools/usr/include",
+                "/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include",
+                "/usr/local/include",
+                "${default}"
+            ]
+        }
+    ],
+    "version": 4
+}

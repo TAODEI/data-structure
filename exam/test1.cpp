@@ -5,14 +5,18 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
+    char s[];
 
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
-int main() {
+int main(char s[]) {
+    char s[100];
+    char *sp = s;
+
     int n, m, _;
-    cin >> n;
-    cin >> _;
+    cin >> n >> _;
+    auto a = 1;
     ListNode *head = new ListNode(_);
     ListNode *q = head;
 
