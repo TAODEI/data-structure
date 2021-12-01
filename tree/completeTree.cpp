@@ -62,7 +62,7 @@ bool isCompleteTreeByLevel(TreeNode *root) {
 
 int main() {
     char str[100] = "abdh###e##cf##g##";
-    cin >> str;
+    // cin >> str;
     s = str;
     auto tree = create();
 
