@@ -30,7 +30,7 @@ vector<int> preorderTraversal(TreeNode* root) {
     return ret;
 }
 
-vector<int> preorderTraversal(TreeNode* root) {
+vector<int> preOrderTraversal(TreeNode* root) {
     vector<int> ret;
     if(root == NULL) {
         return ret;
@@ -70,7 +70,7 @@ vector<int> inorderTraversal(TreeNode* root) {
     return ret;
 }
 
-vector<int> inorderTraversal(TreeNode* root) {
+vector<int> inOrderTraversal(TreeNode* root) {
     vector<int> ret;
     // if(root == NULL) {
     //     return ret;
@@ -93,7 +93,6 @@ vector<int> inorderTraversal(TreeNode* root) {
         }
     }
 }
-
 
 
 

@@ -22,7 +22,6 @@ TreeNode *create() {
     root->left = create();
     i++;
     root->right = create();
-    // i++;
     return root;
 }
 
